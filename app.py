@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 # Set your secret key: remember to change this to your live secret key in production
 stripe.api_key = "sk_test_51PNrL501Pe4bfmvIaMxBrExCl2J41NECyaBlNHpATxxu881MCVxqt5pup0353Z63KyMvyUfu6FBKNLDkVpJfc3hc00wt1CYNr2"
-endpoint_secret = 'your_endpoint_secret'  # Replace with your actual endpoint secret
+endpoint_secret = 'we_1PO1vh01Pe4bfmvIBs3NF5VX'  # Replace with your actual endpoint secret
 
 
 
