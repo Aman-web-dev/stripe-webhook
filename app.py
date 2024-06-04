@@ -28,7 +28,7 @@ def webhook():
         return jsonify({'error': str(e)}), 400
     except stripe.error.SignatureVerificationError as e:
         # Invalid signature
-        return jsonify({'error': str(e)}), 400
+        return jsonify({'error': str(e)}), 404
 
     # Handle the event
     if event['type'] == 'customer.created':
