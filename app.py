@@ -14,7 +14,8 @@ endpoint_secret = 'we_1PO1vh01Pe4bfmvIBs3NF5VX'  # Replace with your actual endp
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
-    payload = request.get_data(as_text=True)
+    # payload = request.get_data(as_text=True)
+    payload = request.data
     sig_header = request.headers.get('STRIPE_SIGNATURE')
     event = None
 
