@@ -8,6 +8,10 @@ app = Flask(__name__)
 stripe.api_key = "sk_test_51PNrL501Pe4bfmvIaMxBrExCl2J41NECyaBlNHpATxxu881MCVxqt5pup0353Z63KyMvyUfu6FBKNLDkVpJfc3hc00wt1CYNr2"
 endpoint_secret = 'your_endpoint_secret'  # Replace with your actual endpoint secret
 
+
+
+
+
 @app.route('/webhook', methods=['POST'])
 def webhook():
     payload = request.get_data(as_text=True)
