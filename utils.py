@@ -7,8 +7,11 @@ import os
 stripe.api_key = "sk_test_51PNrL501Pe4bfmvIaMxBrExCl2J41NECyaBlNHpATxxu881MCVxqt5pup0353Z63KyMvyUfu6FBKNLDkVpJfc3hc00wt1CYNr2"
 
 # Initialize Supabase client
-url: str = os.environ["SUPABASE_URL"]
-key: str = os.environ["SUPABASE_API_KEY"]
+# url: str = os.environ["SUPABASE_URL"]
+# key: str = os.environ["SUPABASE_API_KEY"]
+
+url: str = "https://tyzqjwnqqrsszanzcxeq.supabase.co"
+key: str = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR5enFqd25xcXJzc3phbnpjeGVxIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTcxNzU1NjA3OSwiZXhwIjoyMDMzMTMyMDc5fQ.B1D4PS8o9yz1HmAgmK6cZlHuM1tbzK-eVNDJqBF8WDA"
 supabase: Client = create_client(url, key)
 
 
