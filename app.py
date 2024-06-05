@@ -1,20 +1,17 @@
 from flask import Flask, request, jsonify
-from utils import create_customer , create_subscription ,cancel_subscription
+from utils import create_stripe_customer, create_stripe_subscription, cancel_stripe_subscription
+from utils import upload_customer_details, upload_subscription_details, update_subscription_cancellation
 import stripe
 
 app = Flask(__name__)
 
 # Set your secret key: remember to change this to your live secret key in production
 stripe.api_key = "sk_test_51PNrL501Pe4bfmvIaMxBrExCl2J41NECyaBlNHpATxxu881MCVxqt5pup0353Z63KyMvyUfu6FBKNLDkVpJfc3hc00wt1CYNr2"
-endpoint_secret = 'we_1PO1vh01Pe4bfmvIBs3NF5VX'  # Replace with your actual endpoint secret
-
-
-
+endpoint_secret = 'whsec_qXCiL2CoPwmd0JLDGMuXbgL1ERKtz9EL'
 
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
-    # payload = request.get_data(as_text=True)
     payload = request.data
     sig_header = request.headers.get('STRIPE_SIGNATURE')
     event = None
@@ -44,29 +41,32 @@ def webhook():
 
 def handle_customer_created(customer):
     print('Customer created:', customer)
+    upload_customer_details(customer)
 
 def handle_subscription_created(subscription):
     print('Subscription created:', subscription)
+    upload_subscription_details(subscription)
 
 def handle_subscription_deleted(subscription):
     print('Subscription deleted:', subscription)
+    update_subscription_cancellation(subscription)
 
-@app.route('/create_customer', methods=['POST'])
-def create_customer_endpoint():
+@app.route('/create_stripe_customer', methods=['POST'])
+def create_stripe_customer_endpoint():
     data = request.json
-    customer = create_customer(data['name'], data['email'])
+    customer = create_stripe_customer(data['name'], data['email'])
     return jsonify(customer), 201
 
-@app.route('/create_subscription', methods=['POST'])
-def create_subscription_endpoint():
+@app.route('/create_stripe_subscription', methods=['POST'])
+def create_stripe_subscription_endpoint():
     data = request.json
-    subscription = create_subscription(data['customer_id'], data['price_id'])
+    subscription = create_stripe_subscription(data['customer_id'], data['price_id'])
     return jsonify(subscription), 201
 
-@app.route('/cancel_subscription', methods=['POST'])
-def cancel_subscription_endpoint():
+@app.route('/cancel_stripe_subscription', methods=['POST'])
+def cancel_stripe_subscription_endpoint():
     data = request.json
-    subscription = cancel_subscription(data['subscription_id'])
+    subscription = cancel_stripe_subscription(data['subscription_id'])
     return jsonify(subscription), 200
 
 if __name__ == '__main__':
