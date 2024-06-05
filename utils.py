@@ -46,7 +46,7 @@ def upload_customer_details(email: str, name: str,phone:str) -> dict:
         "name": name,
         "phone_number":phone
     }
-    response = supabase.table("user").insert(data).execute()
+    response = supabase.table("customer").insert(data).execute()
     return response
     
 def upload_subscription_details(user_id: str, plan: str, status: str = "active") -> dict:
