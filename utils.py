@@ -49,10 +49,10 @@ def upload_customer_details(email: str, name: str,phone:str) -> dict:
     response = supabase.table("customer").insert(data).execute()
     return response
     
-def upload_subscription_details(user_id: str, plan: str, status: str = "active") -> dict:
+def upload_subscription_details(user_id: str,subscription_id:str, plan: str, status: str = "active") -> dict:
     subscription_id = str(uuid.uuid4())
     data = {
-        "id": subscription_id,
+        "subscription_id": subscription_id,
         "user_id": user_id,
         "plan": plan,
         "status": status
@@ -62,5 +62,5 @@ def upload_subscription_details(user_id: str, plan: str, status: str = "active")
 
 
 def update_subscription_cancellation(subscription_id: str) -> dict:
-    response = supabase.table("subscription").update({"status": "cancelled"}).eq("id", subscription_id).execute()
+    response = supabase.table("subscription").update({"status": "deleted"}).eq("subscription_id", subscription_id).execute()
     return response

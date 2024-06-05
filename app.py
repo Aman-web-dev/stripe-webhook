@@ -51,6 +51,7 @@ def handle_customer_created(customer):
 
 def handle_subscription_created(subscription):
     print('Subscription created:', subscription)
+    subscription_id = subscription.get('id')  
     user_id = subscription['customer']  # Assuming 'customer' contains the user ID
     plan = subscription['plan']['id']
     status = subscription['status']
