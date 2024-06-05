@@ -41,17 +41,30 @@ def webhook():
 
     return jsonify({'status': 'success',"response":event}), 200
 
+
 def handle_customer_created(customer):
     print('Customer created:', customer)
-    # upload_customer_details(customer)
+    email = customer['email']
+    name = customer['name']
+    phone = customer.get('phone', '')  # Assuming phone is optional
+    upload_customer_details(email, name, phone)
 
 def handle_subscription_created(subscription):
     print('Subscription created:', subscription)
-    # upload_subscription_details(subscription)
+    user_id = subscription['customer']  # Assuming 'customer' contains the user ID
+    plan = subscription['plan']['id']
+    status = subscription['status']
+    upload_subscription_details(user_id, plan, status)
 
 def handle_subscription_deleted(subscription):
     print('Subscription deleted:', subscription)
-    # update_subscription_cancellation(subscription)
+    subscription_id = subscription['id']
+    update_subscription_cancellation(subscription_id)
+
+
+
+
+
 
 @app.route('/create_stripe_customer', methods=['POST'])
 def create_stripe_customer_endpoint():
