@@ -42,15 +42,15 @@ def webhook():
 
 def handle_customer_created(customer):
     print('Customer created:', customer)
-    upload_customer_details(customer)
+    # upload_customer_details(customer)
 
 def handle_subscription_created(subscription):
     print('Subscription created:', subscription)
-    upload_subscription_details(subscription)
+    # upload_subscription_details(subscription)
 
 def handle_subscription_deleted(subscription):
     print('Subscription deleted:', subscription)
-    update_subscription_cancellation(subscription)
+    # update_subscription_cancellation(subscription)
 
 @app.route('/create_stripe_customer', methods=['POST'])
 def create_stripe_customer_endpoint():
