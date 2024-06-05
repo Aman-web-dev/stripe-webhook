@@ -38,23 +38,25 @@ def cancel_stripe_subscription(subscription_id):
     return subscription
 
 
-def upload_customer_details(email: str, name: str,phone:str) -> dict:
+def upload_customer_details(email: str, name: str,phone:str,customer_id:str) -> dict:
     user_id = str(uuid.uuid4())
     data = {
         "id": user_id,
         "email": email,
+        "stripe_id":customer_id,
         "name": name,
         "phone_number":phone
     }
     response = supabase.table("customer").insert(data).execute()
     return response
     
-def upload_subscription_details(user_id: str,subscription_id:str, plan: str, status: str = "active") -> dict:
-    subscription_id = str(uuid.uuid4())
+def upload_subscription_details(customer_id: str,subscription_id:str, plan: str, status: str = "active") -> dict:
+    id = str(uuid.uuid4())
     data = {
+        "id":id,
         "subscription_id": subscription_id,
-        "user_id": user_id,
-        "plan": plan,
+        "user_stripe_id": customer_id,
+        "plan": plan,   
         "status": status
     }
     response = supabase.table("subscription").insert(data).execute()

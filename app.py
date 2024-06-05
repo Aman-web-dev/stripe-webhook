@@ -44,18 +44,19 @@ def webhook():
 
 def handle_customer_created(customer):
     print('Customer created:', customer)
+    customer_id = customer.get('id') 
     email = customer['email']
     name = customer['name']
     phone = customer.get('phone', '')  # Assuming phone is optional
-    upload_customer_details(email, name, phone)
+    upload_customer_details(email, name, phone,customer_id)
 
 def handle_subscription_created(subscription):
     print('Subscription created:', subscription)
     subscription_id = subscription.get('id')  
-    user_id = subscription['customer']  # Assuming 'customer' contains the user ID
+    customer_id = subscription['customer']  # Assuming 'customer' contains the user ID
     plan = subscription['plan']['id']
     status = subscription['status']
-    upload_subscription_details(user_id, plan, status)
+    upload_subscription_details(user_id=customer_id, plan=plan, status=status,subscription_id=subscription_id)
 
 def handle_subscription_deleted(subscription):
     print('Subscription deleted:', subscription)
