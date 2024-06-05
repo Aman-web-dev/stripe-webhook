@@ -56,7 +56,7 @@ def handle_subscription_created(subscription):
     customer_id = subscription['customer']  # Assuming 'customer' contains the user ID
     plan = subscription['plan']['id']
     status = subscription['status']
-    upload_subscription_details(user_id=customer_id, plan=plan, status=status,subscription_id=subscription_id)
+    upload_subscription_details(customer_id=customer_id, plan=plan, status=status,subscription_id=subscription_id)
 
 def handle_subscription_deleted(subscription):
     print('Subscription deleted:', subscription)
