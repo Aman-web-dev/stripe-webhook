@@ -31,6 +31,7 @@ def webhook():
     # Handle the event
     if event['type'] == 'customer.created':
         handle_customer_created(event['data']['object'])
+        print(payload)
     elif event['type'] == 'customer.subscription.created':
         handle_subscription_created(event['data']['object'])
     elif event['type'] == 'customer.subscription.deleted':
@@ -38,7 +39,7 @@ def webhook():
     else:
         print('Unhandled event type {}'.format(event['type']))
 
-    return jsonify({'status': 'success'}), 200
+    return jsonify({'status': 'success',"response":event}), 200
 
 def handle_customer_created(customer):
     print('Customer created:', customer)
