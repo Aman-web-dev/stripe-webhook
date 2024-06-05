@@ -13,6 +13,7 @@ endpoint_secret = 'whsec_qXCiL2CoPwmd0JLDGMuXbgL1ERKtz9EL'
 @app.route('/webhook', methods=['POST'])
 def webhook():
     payload = request.data
+    print(payload)
     sig_header = request.headers.get('STRIPE_SIGNATURE')
     event = None
 
